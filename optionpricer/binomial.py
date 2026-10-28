@@ -54,4 +54,3 @@ def binomial_price(S, K, T, r, sigma, option_type="call", q=0.0, steps=500, amer
             values = np.maximum(values, payoff(S * u ** (i - 2 * j), K, option_type))
 
     return float(values[0])
-
