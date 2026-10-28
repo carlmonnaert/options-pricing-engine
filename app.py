@@ -1,5 +1,6 @@
 # streamlit run app.py
 import time
+from typing import TypedDict
 
 import pandas as pd
 import streamlit as st
@@ -34,9 +35,28 @@ antithetic = sb.checkbox("Antithetic variates", value=True)
 control_variate = sb.checkbox("Control variate (S_T)", value=True)
 seed = int(sb.number_input("Seed", min_value=0, value=42, step=1))
 
-params = dict(S=S, K=K, T=T, r=r, sigma=sigma, option_type=option_type, q=q)
-mc_settings = dict(n_path=n_path, antithetic=antithetic,
-                   control_variate=control_variate, seed=seed)
+
+# typed so Pylance can check each key when unpacking with **
+class Params(TypedDict):
+    S: float
+    K: float
+    T: float
+    r: float
+    sigma: float
+    option_type: str
+    q: float
+
+
+class MCSettings(TypedDict):
+    n_path: int
+    antithetic: bool
+    control_variate: bool
+    seed: int
+
+
+params = Params(S=S, K=K, T=T, r=r, sigma=sigma, option_type=option_type, q=q)
+mc_settings = MCSettings(n_path=n_path, antithetic=antithetic,
+                         control_variate=control_variate, seed=seed)
 
 try:
     t0 = time.perf_counter()
