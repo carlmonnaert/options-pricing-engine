@@ -1,7 +1,7 @@
 """
 Monte Carlo simulation for option pricing.
 
-Under GMB assumption, we can sample S_T directly, and do not need to simulate the entire path:
+Under GBM assumption, we can sample S_T directly, and do not need to simulate the entire path:
 
 S_T = S * exp((r - q - sigma**2 / 2) * T + sigma * sqrt(T) * Z)
 where Z ~ N(0, 1)
@@ -82,7 +82,7 @@ def mc_price(S, K, T, r, sigma, option_type="call", q=0.0, n_path=100_000,
 
     if control_variate:
         cov = np.cov(Y, X)
-        beta = cov[0, 1] / cov[0, 0] if cov[0, 0] > 0 else 0.0
+        beta = cov[0, 1] / cov[1, 1] if cov[1, 1] > 0 else 0.0
         Y = Y - beta * (X - S * np.exp(-q * T))
 
     price = Y.mean()
