@@ -41,7 +41,7 @@ def payoff(ST, K, option_type):
     Calculates the payoff of an option at maturity.
 
     Parameters:
-    ST : float
+    ST : float or np.ndarray
         Stock price at maturity
     K : float
         Strike price
@@ -49,13 +49,13 @@ def payoff(ST, K, option_type):
         Type of the option, either 'call' or 'put'
 
     Returns:
-    float
+    float or np.ndarray
         The payoff of the option
     Notes: Assumes that option_type has been validated and is either 'call' or 'put'
     """
     if option_type == "call":
-        return max(ST - K, 0)
+        return np.maximum(ST - K, 0)
     elif option_type == "put":
-        return max(K - ST, 0)
+        return np.maximum(K - ST, 0)
     else:
         raise ValueError("Invalid option_type, must be 'call' or 'put'")
