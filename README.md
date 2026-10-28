@@ -4,7 +4,7 @@
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://5qm6ascbo4spibsyvng58o.streamlit.app/)
 ![python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue)
 
-A small Python library that prices European options three independent ways, Black-Scholes, a Cox-Ross-Rubinstein binomial tree and Monte Carlo simulation, aswell as American options with Cox-Ross-Rubinstein; and checks that they agree. It comes with a Streamlit dashboard to play with the inputs and watch the methods converge.
+A small Python library that prices European options three independent ways, Black-Scholes, a Cox-Ross-Rubinstein binomial tree and Monte Carlo simulation, as well as American options with Cox-Ross-Rubinstein; and checks that they agree. It comes with a Streamlit dashboard to play with the inputs and watch the methods converge.
 
 **Live demo:** [https://.streamlit.app](https://5qm6ascbo4spibsyvng58o.streamlit.app/)
 
