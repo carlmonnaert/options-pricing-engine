@@ -164,4 +164,6 @@ def put_call_parity_gap(S, K, T, r, sigma, q=0.0, pricer=bs_price, **kwargs):
     """
     call = pricer(S, K, T, r, sigma, option_type="call", q=q, **kwargs)
     put = pricer(S, K, T, r, sigma, option_type="put", q=q, **kwargs)
+    call = getattr(call, "price", call)
+    put = getattr(put, "price", put)
     return float(call - put - S * np.exp(-q * T) + K * np.exp(-r * T))
