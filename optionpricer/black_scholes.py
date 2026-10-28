@@ -136,6 +136,32 @@ def bs_greeks(S, K, T, r, sigma, option_type="call", q=0.0):
     return Greeks(float(delta), float(gamma), float(vega), float(theta), float(rho))
 
 def put_call_parity_gap(S, K, T, r, sigma, q=0.0, pricer=bs_price, **kwargs):
+    """
+    Calculate the difference between the call and put prices according to the put-call parity.
+
+    Parameters
+    ----------
+    S : float
+        Current stock price
+    K : float
+        Strike price
+    T : float
+        Time to maturity in years
+    r : float
+        Risk-free interest rate
+    sigma : float
+        Volatility of the underlying asset
+    q : float, optional
+        Continuous dividend yield (default is 0.0)
+    pricer : callable, optional
+        Function to price the options (default is bs_price)
+    **kwargs : additional keyword arguments for the pricer function
+
+    Returns
+    -------
+    float
+        The put-call parity gap (should be close to 0 if parity holds)
+    """
     call = pricer(S, K, T, r, sigma, option_type="call", q=q, **kwargs)
     put = pricer(S, K, T, r, sigma, option_type="put", q=q, **kwargs)
     return float(call - put - S * np.exp(-q * T) + K * np.exp(-r * T))
